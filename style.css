@@ -1,10 +1,14 @@
+body {
+    /* background-color: #0cecdd; */
+    background-color: #fcd8d4;
+}
 .container {
     font-family: 'Comfortaa', cursive;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2em 0em;
+    padding: 2rem 0rem;
 }
 
 #myCanvas {
