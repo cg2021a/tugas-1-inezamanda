@@ -20,3 +20,5 @@ Benda pada foto adalah Kotak Parfum yang diawali dengan huruf K
 ### Kiri Atas
 ![Kiri Atas](assets/kiriatas.jpeg)
 
+## Demo
+Link demo dapat diakses [disini](https://loving-khorana-16aa2b.netlify.app/)
