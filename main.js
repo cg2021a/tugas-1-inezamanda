@@ -89,19 +89,53 @@ function main(){
     
     let color = []
 
-    for (let i = 0; i < vertices.length / 6; i++) {
-        // let r = Math.random() / 2 + 0.45;
-        // let g = Math.random() / 2 + 0.45;
-        // let b = Math.random() / 2 + 0.45;
-        let r = 216/255;
-        let g = 202/255;
-        let b = 198/255;
-        for (let j = 0; j < 3; j++) {
-            color.push(r);
-            color.push(g);
-            color.push(b);
-            color.push(1);
-        }
+    // for (let i = 0; i < vertices.length/6; i++) {
+    //     let r = Math.random() / 2 + 0.55;
+    //     let g = Math.random() / 2 + 0.55;
+    //     let b = Math.random() / 2 + 0.55;
+    //     for (let j = 0; j < 3; j++) {
+    //         color.push(r);
+    //         color.push(g);
+    //         color.push(b);
+    //         color.push(1);
+    //     }
+    // }
+
+    let r = 216/255;
+    let g = 202/255;
+    let b = 198/255;
+    for (let j = 0; j < topFront.length / 2; j++) {
+        color.push(r);
+        color.push(g);
+        color.push(b);
+        color.push(1);
+    }
+    r = 130/255;
+    g = 119/255;
+    b = 115/255;
+    for (let j = 0; j < bottomFront.length / 2; j++) {
+        color.push(r);
+        color.push(g);
+        color.push(b);
+        color.push(1);
+    }
+    r = 216/255;
+    g = 202/255;
+    b = 198/255;
+    for (let j = 0; j < topRight.length / 2; j++) {
+        color.push(r);
+        color.push(g);
+        color.push(b);
+        color.push(1);
+    }
+    r = 92/255;
+    g = 80/255;
+    b = 68/255;
+    for (let j = 0; j < bottomRight.length / 2; j++) {
+        color.push(r);
+        color.push(g);
+        color.push(b);
+        color.push(1);
     }
 
     var vertexBufferObject = gl.createBuffer();
