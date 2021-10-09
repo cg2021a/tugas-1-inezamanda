@@ -2,7 +2,7 @@ function main() {
   const canvas = document.querySelector("#myCanvas");
   const renderer = new THREE.WebGLRenderer({ canvas });
 
-  const fov = 40;
+  const fov = 50;
   const aspect = 2; // the canvas default
   const near = 0.1;
   const far = 1000;
@@ -14,19 +14,45 @@ function main() {
 
   let lights = [];
   {
-    const color = 0xffffff;
-    const intensity = 1;
-    const light = new THREE.DirectionalLight(color, intensity);
-    light.position.set(-1, 2, 4);
-    scene.add(light);
+    const directLight = new THREE.DirectionalLight(0xffffff, 1);
+    directLight.position.set(5, 5, 5);
+    lights.push(directLight);
   }
   {
-    const color = 0xffffff;
-    const intensity = 1;
-    const light = new THREE.PointLight(color, intensity);
-    light.position.set(1, -2, -4);
-    scene.add(light);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    ambientLight.position.set(1, 2, -4);
+    lights.push(ambientLight);
   }
+  {
+    const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+    pointLight.position.set(10, 10, 10);
+    lights.push(pointLight);
+  }
+  {
+    const hemisphereLight = new THREE.HemisphereLight(0xffffff, "#357ef5", 1);
+    hemisphereLight.position.set(0, 10, 0);
+    lights.push(hemisphereLight);
+  }
+  {
+    const spotLight = new THREE.SpotLight(0xffffff, 1, 50);
+    spotLight.position.set(5, 10, 10);
+    lights.push(spotLight);
+  }
+
+  lights.forEach((light) => {
+    scene.add(light);
+    light.visible = false;
+  });
+  lights[0].visible = true;
+
+  const selectedLight = document.getElementById("light");
+  selectedLight.addEventListener("change", (e) => {
+    const selected = e.target.value;
+    lights.forEach((light) => {
+      light.visible = false;
+    });
+    lights[selected].visible = true;
+  });
 
   const objects = [];
   const spread = 15;
