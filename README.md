@@ -6,7 +6,7 @@
 
 ## Demo
 
-Vertex kotak parfum : [disini](https://tender-payne-aa15e9.netlify.app)
+Vertex kotak parfum : [disini](https://tender-payne-aa15e9.netlify.app)<br/>
 Object 3D dengan Three.js : [disini](https://nifty-hamilton-c57d3a.netlify.app)
 
 ## Benda
