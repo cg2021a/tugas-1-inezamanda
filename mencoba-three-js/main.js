@@ -301,17 +301,11 @@ function main() {
 
   //   function animateCircularDiagonal(obj, time, reverse) {
   //     const speed = time;
-
   //     obj.position.x = 10 * Math.sin(speed) * 1.5;
   //     obj.position.z = 10 * Math.cos(speed) * 3;
   //     if (reverse) {
   //       obj.position.y = -obj.position.x;
   //       obj.position.z = -obj.position.z;
-  //     } else {
-  //       obj.position.y = obj.position.x;
-  //       obj.position.x = -obj.position.y;
-  //       obj.position.z = -obj.position.z;
-  //     }
   //   }
 
   function resizeRendererToDisplaySize(renderer) {
@@ -333,10 +327,6 @@ function main() {
       camera.aspect = canvas.clientWidth / canvas.clientHeight;
       camera.updateProjectionMatrix();
     }
-
-    // animateCircularDiagonal(objects[2], time, false);
-    // animateCircularDiagonal(objects[4], time, true);
-
     // animateCircularX(objects[1], time, false, 3);
     // animateCircularY(objects[1], time, false, 3);
     // animateCircularX(objects[7], time, true, 3);
