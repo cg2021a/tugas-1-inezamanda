@@ -14,29 +14,44 @@ function main() {
 
   let lights = [];
   {
-    const directLight = new THREE.DirectionalLight(0xffffff, 1);
-    directLight.position.set(5, 5, 5);
-    lights.push(directLight);
+    const directLight1 = new THREE.DirectionalLight(0xffffff, 1);
+    directLight1.position.set(-1, 2, 4);
+    lights.push(directLight1);
+    const directLight2 = new THREE.DirectionalLight(0xffffff, 1);
+    directLight2.position.set(1, -2, -4);
+    lights.push(directLight2);
   }
   {
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-    ambientLight.position.set(1, 2, -4);
-    lights.push(ambientLight);
+    const ambientLight1 = new THREE.AmbientLight(0xffffff, 1);
+    ambientLight1.position.set(-1, 2, 4);
+    lights.push(ambientLight1);
+    const ambientLight2 = new THREE.AmbientLight(0xffffff, 1);
+    ambientLight2.position.set(1, -2, -4);
+    lights.push(ambientLight2);
   }
   {
-    const pointLight = new THREE.PointLight(0xffffff, 1, 100);
-    pointLight.position.set(10, 10, 10);
-    lights.push(pointLight);
+    const pointLight1 = new THREE.PointLight(0xffffff, 1, 100);
+    pointLight1.position.set(-1, 2, 4);
+    lights.push(pointLight1);
+    const pointLight2 = new THREE.PointLight(0xffffff, 1, 100);
+    pointLight2.position.set(1, -2, -4);
+    lights.push(pointLight2);
   }
   {
-    const hemisphereLight = new THREE.HemisphereLight(0xffffff, "#357ef5", 1);
-    hemisphereLight.position.set(0, 10, 0);
-    lights.push(hemisphereLight);
+    const hemisphereLight1 = new THREE.HemisphereLight(0xffffff, "#357ef5", 1);
+    hemisphereLight1.position.set(-1, 2, 4);
+    lights.push(hemisphereLight1);
+    const hemisphereLight2 = new THREE.HemisphereLight(0xffffff, "#357ef5", 1);
+    hemisphereLight2.position.set(1, -2, -4);
+    lights.push(hemisphereLight2);
   }
   {
-    const spotLight = new THREE.SpotLight(0xffffff, 1, 50);
-    spotLight.position.set(5, 10, 10);
-    lights.push(spotLight);
+    const spotLight1 = new THREE.SpotLight(0xffffff, 1, 50);
+    spotLight1.position.set(-1, 2, 4);
+    lights.push(spotLight1);
+    const spotLight2 = new THREE.SpotLight(0xffffff, 1, 50);
+    spotLight2.position.set(1, -2, -4);
+    lights.push(spotLight2);
   }
 
   lights.forEach((light) => {
@@ -44,14 +59,21 @@ function main() {
     light.visible = false;
   });
   lights[0].visible = true;
+  lights[1].visible = true;
 
   const selectedLight = document.getElementById("light");
   selectedLight.addEventListener("change", (e) => {
     const selected = e.target.value;
-    lights.forEach((light) => {
-      light.visible = false;
-    });
+    for (let light = 0; light < lights.length; light += 2) {
+      lights[light].visible = false;
+      // console.log(lights[light]);
+      lights[light + 1].visible = false;
+      // console.log(lights[light + 1]);
+    }
+    console.log(selected);
+    console.log(parseInt(selected) + 1);
     lights[selected].visible = true;
+    lights[parseInt(selected) + 1].visible = true;
   });
 
   const objects = [];
@@ -65,17 +87,15 @@ function main() {
     objects.push(obj);
   }
 
-  function createMaterial(material) {
-    const hue = Math.random();
-    const saturation = 1;
-    const luminance = 0.5;
-    material.color.setHSL(hue, saturation, luminance);
-
+  function createMaterial(
+    material,
+    color = material.color.setHSL(Math.random(), 1, 0.5)
+  ) {
     return material;
   }
 
-  function addSolidGeometry(x, y, geometry, material) {
-    const mesh = new THREE.Mesh(geometry, createMaterial(material));
+  function addSolidGeometry(x, y, geometry, material, color) {
+    const mesh = new THREE.Mesh(geometry, createMaterial(material, color));
     addObject(x, y, mesh);
   }
 
@@ -330,7 +350,7 @@ function main() {
     animateTranslate(objects[5]);
     animateTranslate(objects[6]);
     objects.forEach((obj, ndx) => {
-      const speed = 0.1 + ndx * 0.05;
+      const speed = 0.1 + ndx * 0.1;
       const rot = time * speed;
       obj.rotation.x = rot;
       obj.rotation.y = rot;
