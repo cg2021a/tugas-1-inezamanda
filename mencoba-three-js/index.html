@@ -4,18 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital@1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <title>Document</title>
 </head>
 <body>
-    <select name="light" id="light">
-        <option value="0">Directional Light</option>
-        <option value="1">Ambient Light</option>
-        <option value="2">Point Light</option>
-        <option value="3">Hemisphere Light</option>
-        <option value="4">Spotlight</option>
-    </select>
-    <canvas id="myCanvas"></canvas>
+    <div class="container">
+        <h2 style="color: white;">Tugas 2 Grafika Komputer A | Menggambar Objek 3D dengan threejs</h2>
+        <h3 style="color: white;">05111940000208 | Inez Yulia Amanda</h3>
+        <select name="light" id="light">
+            <option value="0">Directional Light</option>
+            <option value="1">Ambient Light</option>
+            <option value="2">Point Light</option>
+            <option value="3">Hemisphere Light</option>
+            <option value="4">Spotlight</option>
+        </select>
+        <canvas id="myCanvas" width="800" height="800"></canvas>
+    </div>
     <script src="./js/three.min.js"></script>
     <script src="./main.js"></script> 
 </body>
