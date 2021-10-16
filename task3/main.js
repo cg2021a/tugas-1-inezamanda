@@ -19,7 +19,7 @@ function main() {
   const controls = new OrbitControls(camera, canvas);
   controls.target.set(0, 0, 0);
   controls.update();
-  
+
   let lights = [];
   {
     const directLight1 = new THREE.DirectionalLight(0xffffff, 1);
@@ -60,10 +60,18 @@ function main() {
     const b = Math.floor(Math.random() * 2) * 100 + 64;
     const rgb = `rgb(${r},${g},${b})`;
 
-    // const colorOpt = ["#00EAD3", "#FF449F", "#B980F0", "#AFB9C8", "#DA0037"];
+    const colorOpt = [
+      "#00EAD3",
+      "#F56FAD",
+      "#B980F0",
+      "#AFB9C8",
+      "#DA0037",
+      "#FFA400",
+      "#77D970"
+    ];
 
-    return rgb;
-    // return colorOpt[Math.floor(Math.random() * colorOpt.length)];
+    // return rgb;
+    return colorOpt[Math.floor(Math.random() * colorOpt.length)];
   }
 
   function createMaterial(material) {
@@ -133,7 +141,7 @@ function main() {
         );
       }
       count++;
-      x+=1.25;
+      x += 1.25;
       if (count === 20) {
         y++;
         x = 0;
@@ -143,7 +151,7 @@ function main() {
       // x = 5
       if (count % 5 === 0) {
         x = 0;
-        z-=1.65;
+        z -= 1.65;
       }
       if (count < 20) {
         speedGenerate *= 0.9;
