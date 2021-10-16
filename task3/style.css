@@ -1,0 +1,31 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background-color: black;
+}
+
+#myCanvas {
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  font-family: "Josefin Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  padding: 2rem 0rem;
+}
+
+h2{
+  margin-bottom: -20px;
+}
+
+.score {
+  margin-top: -3px;
+}
