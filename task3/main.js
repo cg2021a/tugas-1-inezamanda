@@ -141,19 +141,19 @@ function main() {
         );
       }
       count++;
-      x += 1.25;
-      if (count === 20) {
+      x += 1.65;
+      if (count === 16) {
         y++;
         x = 0;
         z = 1.65;
         count = 0;
       }
       // x = 5
-      if (count % 5 === 0) {
+      if (count % 4 === 0) {
         x = 0;
         z -= 1.65;
       }
-      if (count < 20) {
+      if (count < 16) {
         speedGenerate *= 0.9;
         setTimeout(generateObj, speedGenerate);
       }
