@@ -4,13 +4,14 @@ function main() {
   const canvas = document.querySelector("#myCanvas");
   const renderer = new THREE.WebGLRenderer({ canvas });
 
-  const fov = 60;
+  const fov = 50;
   const aspect = 2; // the canvas default
   const near = 0.1;
   const far = 1000;
   const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-  camera.position.y = 120;
-  camera.position.z = 90;
+  camera.position.x = -120;
+  camera.position.y = 60;
+  camera.position.z = 120;
 
   const scene = new THREE.Scene();
   scene.background = new THREE.Color("#a2d2ff");
@@ -67,7 +68,7 @@ function main() {
       "#AFB9C8",
       "#DA0037",
       "#FFA400",
-      "#77D970"
+      "#77D970",
     ];
 
     // return rgb;
@@ -86,7 +87,7 @@ function main() {
   let plane;
   {
     const width = 100;
-    const height = 20;
+    const height = 5;
     const depth = 100;
     plane = new THREE.Mesh(
       new THREE.BoxGeometry(width, height, depth),
@@ -98,7 +99,7 @@ function main() {
         emissive: 0x454545,
       })
     );
-    addObject(0, -1, 1, plane);
+    addObject(0, -2, 0, plane);
   }
 
   let x = 0,
@@ -107,9 +108,8 @@ function main() {
     count = 0,
     speedGenerate = 1000;
   function generateObj() {
-    // balok 4x5x3
-    // y = 3
-    if (y < 3) {
+    // y = 4
+    if (y < 4) {
       {
         const color = randomColor();
         console.log(color);
@@ -129,8 +129,8 @@ function main() {
         );
         addSolidGeometry(
           x - 2.5,
-          y + 0.25,
-          z + 3.5,
+          y - 1.25,
+          z + 2.5,
           geometry,
           new THREE.MeshPhongMaterial({
             side: THREE.DoubleSide,
