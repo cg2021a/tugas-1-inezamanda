@@ -7,7 +7,8 @@
 ## Demo
 
 Vertex kotak parfum : [disini](https://tender-payne-aa15e9.netlify.app)<br/>
-Object 3D dengan Three.js : [disini](https://nifty-hamilton-c57d3a.netlify.app)
+Object 3D dengan Three.js : [disini](https://nifty-hamilton-c57d3a.netlify.app)<br/>
+User Interaction dan Orbit Control : [disini](https://cranky-minsky-be1975.netlify.app/)
 
 ## Benda
 
