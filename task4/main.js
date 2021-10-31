@@ -15,7 +15,6 @@ function main() {
   const far = 1000;
   const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
   camera.position.set(0, 10, 20);
-  // camera.position.set(0, 0, 0.01);
   camera.lookAt(0, 0, 0);
 
   const controls = new OrbitControls(camera, canvas);
@@ -23,11 +22,10 @@ function main() {
   controls.update();
 
   const scene = new THREE.Scene();
-  // scene.background = new THREE.Color("black");
 
   //set lighting 1
   {
-    const skyColor = 0xC56824; // light purple
+    const skyColor = 0xc56824; // light purple
     const groundColor = 0xb97a20; // brownish orange
     const intensity = 1;
     const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
@@ -38,7 +36,7 @@ function main() {
 
   //set lighting 2
   {
-    const color = 0xFAEEE0;
+    const color = 0xfaeee0;
     const intensity = 1;
     const light = new THREE.DirectionalLight(color, intensity);
     light.position.set(5, 10, 2);
@@ -49,7 +47,7 @@ function main() {
 
   //set lighting 3
   {
-    const color = 0xFEF1E6;
+    const color = 0xfef1e6;
     const intensity = 1;
     const light = new THREE.PointLight(color, intensity);
     light.castShadow = true;
@@ -71,23 +69,26 @@ function main() {
   }
 
   //panorama setup
-  const geometry = new THREE.BoxGeometry(100, 100, 100);
-  geometry.scale(-1, 1, 1); // Set up scale.x
-  // geometry.scale(1, -1, 1) Set up scale.y, It will turn the picture upside down , So it is usually set scale.x perhaps scale.z
-  const urls = [
-    "browncloud_ft.jpg", // x pos
-    "browncloud_bk.jpg", // x negatif
-    "browncloud_up.jpg", // y pos
-    "browncloud_dn.jpg", // y neg
-    "browncloud_rt.jpg", // z pos
-    "browncloud_lf.jpg",
-  ];
-  // Instantiation CubeTextureLoader
-  const loader = new THREE.CubeTextureLoader();
-  // load 6 Images
-  const cubeMap = loader.setPath("./assets/skybox/").load(urls);
-  // Take the image texture as the background of the scene
-  scene.background = cubeMap;
+  {
+    const geometry = new THREE.BoxGeometry(100, 100, 100);
+    geometry.scale(-1, 1, 1); // Set up scale.x
+    // geometry.scale(1, -1, 1) Set up scale.y, It will turn the picture upside down , So it is usually set scale.x perhaps scale.z
+    const urls = [
+      "browncloud_ft.jpg", // x pos
+      "browncloud_bk.jpg", // x neg
+      "browncloud_up.jpg", // y pos
+      "browncloud_dn.jpg", // y neg
+      "browncloud_rt.jpg", // z pos
+      "browncloud_lf.jpg", // zneg
+    ];
+
+    // Instantiation CubeTextureLoader
+    const loader = new THREE.CubeTextureLoader();
+    // load 6 Images
+    const cubeMap = loader.setPath("./assets/skybox/").load(urls);
+    // Take the image texture as the background of the scene
+    scene.background = cubeMap;
+  }
 
   // The texture object to be created , Define some parameters of the target texture
   const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(128, {
