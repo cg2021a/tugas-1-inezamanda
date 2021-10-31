@@ -15,45 +15,15 @@ function main() {
   const far = 1000;
   const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
   camera.position.set(0, 10, 20);
+  // camera.position.set(0, 0, 0.01);
+  camera.lookAt(0, 0, 0);
 
   const controls = new OrbitControls(camera, canvas);
   controls.target.set(0, 5, 0);
   controls.update();
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color("black");
-
-  //plane (load texture)
-  {
-    const planeSize = 40;
-
-    const loader = new THREE.TextureLoader();
-    const texture = loader.load("./grass1.jpg");
-    texture.wrapS = THREE.RepeatWrapping;
-    texture.wrapT = THREE.RepeatWrapping;
-    texture.magFilter = THREE.NearestFilter;
-    const repeats = planeSize / 2;
-    texture.repeat.set(repeats, repeats);
-
-    const planeGeo = new THREE.PlaneGeometry(planeSize, planeSize);
-    const planeMat = new THREE.MeshPhongMaterial({
-      map: texture,
-      side: THREE.DoubleSide,
-    });
-    const mesh = new THREE.Mesh(planeGeo, planeMat);
-    mesh.receiveShadow = true;
-    mesh.rotation.x = Math.PI * -0.5;
-    scene.add(mesh);
-  }
-
-  //fog
-  {
-    const near = -0.5;
-    const far = 150;
-    const color = 0x70437d;
-    scene.fog = new THREE.Fog(color, near, far);
-    // scene.background = new THREE.Color(color);
-  }
+  // scene.background = new THREE.Color("black");
 
   //set lighting 1
   {
@@ -87,23 +57,61 @@ function main() {
     scene.add(light);
 
     const helper = new THREE.PointLightHelper(light);
-    scene.add(helper);
-    // scene.add(light);
+    // scene.add(helper);
+    scene.add(light);
   }
 
-  //set lighting 4
-  // {
-  //     const color = 0xa491b3;
-  //     const intensity = 1;
-  //     const light = new THREE.PointLight(color, intensity);
-  //     light.castShadow = true;
-  //     light.position.set(7, 13, 7);
-  //     scene.add(light);
+  //fog
+  {
+    const near = -0.5;
+    const far = 150;
+    const color = 0x70437d;
+    scene.fog = new THREE.Fog(color, near, far);
+    // scene.background = new THREE.Color(color);
+  }
 
-  //     const helper = new THREE.PointLightHelper(light);
-  //     scene.add(helper);
-  //     // scene.add(light);
-  // }
+  //panorama setup
+  const geometry = new THREE.BoxGeometry(100, 100, 100);
+  geometry.scale(-1, 1, 1); // Set up scale.x
+  // geometry.scale(1, -1, 1) Set up scale.y, It will turn the picture upside down , So it is usually set scale.x perhaps scale.z
+  const urls = [
+    "browncloud_ft.jpg", // x pos
+    "browncloud_bk.jpg", // x negatif
+    "browncloud_up.jpg", // y pos
+    "browncloud_dn.jpg", // y neg
+    "browncloud_rt.jpg", // z pos
+    "browncloud_lf.jpg",
+  ];
+  // Instantiation CubeTextureLoader
+  const loader = new THREE.CubeTextureLoader();
+  // load 6 Images
+  const cubeMap = loader.setPath("./assets/skybox/").load(urls);
+  // Take the image texture as the background of the scene
+  scene.background = cubeMap;
+
+  // The texture object to be created , Define some parameters of the target texture
+  const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(128, {
+    format: THREE.RGBFormat,
+    generateMipmaps: true,
+    minFilter: THREE.LinearMipmapLinearFilter,
+  });
+
+  // establish cubeCamera
+  const cubeCamera = new THREE.CubeCamera(1, 100, cubeRenderTarget);
+  cubeCamera.position.set(1.5, 10, 2);
+  scene.add(cubeCamera);
+
+  // Create a sphere shape
+  {
+    const sphereGeometry = new THREE.SphereGeometry(0.5, 30, 30);
+    // Use the image texture as the sphere's environment map （cubeMap For panoramic view CubeTextureLoader Loaded texture ）
+    const sphereMaterial = new THREE.MeshBasicMaterial({
+      envMap: cubeCamera.renderTarget,
+    });
+    const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+    sphere.position.set(1.5, 10, 2);
+    scene.add(sphere);
+  }
 
   //load object land
   {
@@ -191,7 +199,7 @@ function main() {
     }
 
     renderer.render(scene, camera);
-
+    cubeCamera.updateCubeMap(renderer, scene);
     requestAnimationFrame(render);
   }
 
