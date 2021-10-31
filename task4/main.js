@@ -27,7 +27,7 @@ function main() {
 
   //set lighting 1
   {
-    const skyColor = 0xcfc3d9; // light purple
+    const skyColor = 0xC56824; // light purple
     const groundColor = 0xb97a20; // brownish orange
     const intensity = 1;
     const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
@@ -38,7 +38,7 @@ function main() {
 
   //set lighting 2
   {
-    const color = 0x8967a3;
+    const color = 0xFAEEE0;
     const intensity = 1;
     const light = new THREE.DirectionalLight(color, intensity);
     light.position.set(5, 10, 2);
@@ -49,7 +49,7 @@ function main() {
 
   //set lighting 3
   {
-    const color = 0xa491b3;
+    const color = 0xFEF1E6;
     const intensity = 1;
     const light = new THREE.PointLight(color, intensity);
     light.castShadow = true;
