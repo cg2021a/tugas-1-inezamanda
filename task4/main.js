@@ -62,8 +62,8 @@ function main() {
   //fog
   {
     const near = -0.5;
-    const far = 150;
-    const color = 0x70437d;
+    const far = 300;
+    const color = 0xb27d44;
     scene.fog = new THREE.Fog(color, near, far);
     // scene.background = new THREE.Color(color);
   }
@@ -116,7 +116,7 @@ function main() {
 
   //plane (load texture)
   {
-    const planeSize = 40;
+    const planeSize = 10000;
 
     const loader = new THREE.TextureLoader();
     const texture = loader.load("./assets/grass1.jpg");
@@ -134,6 +134,7 @@ function main() {
     const mesh = new THREE.Mesh(planeGeo, planeMat);
     mesh.receiveShadow = true;
     mesh.rotation.x = Math.PI * -0.5;
+    mesh.position.y = -5;
     scene.add(mesh);
   }
 
